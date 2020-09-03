@@ -11,6 +11,7 @@ use Tests\TestCase;
 class CreateLinkTest extends TestCase
 {
   use DatabaseMigrations;
+
   /**
    * Unauthenticated users can not create links
    *
@@ -31,7 +32,6 @@ class CreateLinkTest extends TestCase
    */
   public function it_authenticated_users_may_create_links()
   {
-    $this->withoutExceptionHandling();
     $this->signIn();
     $link = make('App\Link', ['user_id' => Auth::id()]);
     $this->post(route('links.store'), $link->toArray())

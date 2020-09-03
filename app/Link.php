@@ -12,4 +12,9 @@ class Link extends Model
     {
       return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function visits()
+    {
+      return $this->hasMany('App\Visit');
+    }
 }

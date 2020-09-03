@@ -50,4 +50,17 @@ class LinkTest extends TestCase
     $this->assertNotNull($link->title);
     $this->assertIsString($link->title);
   }
+
+  /**
+   * Links should have visits
+   *
+   * @test
+   * @return void
+   */
+  public function it_should_have_visits()
+  {
+    $link = create('App\Link');
+    create('App\Visit', ['link_id' => $link->id]);
+    $this->assertInstanceOf('App\Visit', $link->visits->first());
+  }
 }

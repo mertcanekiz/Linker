@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Link;
+use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -22,7 +23,8 @@ class LinkController extends Controller
    */
   public function index()
   {
-    //
+    $links = Auth::user()->links;
+    return view('links.index', compact('links'));
   }
 
   /**
@@ -84,7 +86,12 @@ class LinkController extends Controller
    */
   public function update(Request $request, Link $link)
   {
-    //
+    $this->authorize('update', $link);
+    $request->validate([
+      'title' => 'required|max:255',
+      'url' => 'required|url'
+    ]);
+    Auth::user()->links()->update($request->only(['title', 'url']));
   }
 
   /**
@@ -95,6 +102,8 @@ class LinkController extends Controller
    */
   public function destroy(Link $link)
   {
-    //
+    $this->authorize('delete', $link);
+    $link->delete();
+    return redirect(route(links.index));
   }
 }
