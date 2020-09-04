@@ -28,7 +28,7 @@ class LinkController extends Controller
    */
   public function index()
   {
-    $links = Auth::user()->links()->orderBy('ordering', 'asc')->get();
+    $links = Auth::user()->links()->orderBy('ordering', 'asc')->withCount('visits')->get();
     return view('links.index', compact('links'));
   }
 
@@ -61,9 +61,9 @@ class LinkController extends Controller
     $linkIds = Auth::user()->links()->pluck('id');
 
 
-    if (!consistsOfTheSameValues($ordering, $linkIds->toArray())) {
-      return response()->json([], 400);
-    }
+//    if (!consistsOfTheSameValues($ordering, $linkIds->toArray())) {
+//      return response()->json([], 400);
+//    }
 
     foreach ($ordering as $i => $iValue) {
       Auth::user()->links()->where('id', $ordering[$i])->update([
