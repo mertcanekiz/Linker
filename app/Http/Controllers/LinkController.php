@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Link;
-use http\Client\Response;
+use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class LinkController extends Controller
 {
@@ -25,6 +27,51 @@ class LinkController extends Controller
   {
     $links = Auth::user()->links()->orderBy('ordering', 'asc')->get();
     return view('links.index', compact('links'));
+  }
+
+  /**
+   * Display the Linker page for the current user
+   *
+   * @param User $user
+   *
+   * @return View
+   */
+  public function linker(User $user)
+  {
+    $links = $user->links()->orderBy('ordering', 'asc')->get();
+    return view('linker', [
+      'user' => $user,
+      'links' => $links
+    ]);
+  }
+
+  /**
+   * Change ordering of the links for the authenticated user
+   *
+   * @param Request $request
+   * @return JsonResponse
+   */
+  public function changeOrder(Request $request)
+  {
+    $ordering = $request->ordering;
+
+    $linkIds = Auth::user()->links()->pluck('id');
+
+
+    if (!consistsOfTheSameValues($ordering, $linkIds->toArray())) {
+      return response()->json([], 400);
+    }
+
+    for ($i = 0; $i < count($ordering); $i++) {
+      Auth::user()->links()->where('id', $ordering[$i])->update([
+        'ordering' => $i
+      ]);
+    }
+
+    return response()->json([
+      'newOrdering' => Auth::user()->links()->get()
+    ], 200);
+
   }
 
   /**

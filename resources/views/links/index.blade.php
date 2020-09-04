@@ -3,9 +3,11 @@
 @section('content')
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <a href="#" class="btn btn-success btn-lg btn-block"><span><i class="fas fa-link"></i></span> <strong>My Linker</strong></a>
-      <a class="btn btn-primary btn-lg btn-block" href="{{ route('links.create') }}"><span><i class="fas fa-plus"></i></span> <strong>Add new link</strong></a>
       <h3 class="mt-3">Links</h3>
+      <a class="btn btn-primary btn-lg btn-block" href="{{ route('links.create') }}"><span><i
+            class="fas fa-plus"></i></span> <strong>Add new link</strong></a>
+      <a href="{{ route('linker', Auth::user())}}" class="btn btn-success btn-lg btn-block"><span><i class="fas fa-link"></i></span>
+        <strong>My Linker</strong></a>
       <div id="linksList">
         @foreach($links as $link)
           <x-link :link="$link"/>
@@ -17,13 +19,12 @@
 
 @section('javascript')
   <script>
-    document.addEventListener("DOMContentLoaded", function(){
+    document.addEventListener("DOMContentLoaded", function () {
       let linksList = document.getElementById('linksList');
       Sortable.create(document.getElementById('linksList'), {
         handle: '.drag-handle',
         animation: 200,
-        onEnd: (evt) =>
-        {
+        onEnd: (evt) => {
           if (evt.oldIndex == evt.newIndex) {
             return;
           }
@@ -35,9 +36,9 @@
           axios.post('/changeorder', {
             ordering
           }, {
-              headers: {
-                'Content-Type': 'application/json'
-              }
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }).then(response => {
             console.log(response.data);
           }).catch(error => {
