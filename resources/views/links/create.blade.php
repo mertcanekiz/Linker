@@ -19,6 +19,7 @@
               <input type="url" name="url" id="url" class="form-control" required>
             </div>
             <button class="btn btn-primary">Create</button>
+            <a href="{{ route('links.index') }}" class="btn btn-secondary">Cancel</a>
           </form>
         </div>
       </div>

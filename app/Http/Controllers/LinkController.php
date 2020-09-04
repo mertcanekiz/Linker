@@ -74,7 +74,7 @@ class LinkController extends Controller
    */
   public function edit(Link $link)
   {
-    //
+    return view('links.edit', compact('link'));
   }
 
   /**
@@ -91,7 +91,8 @@ class LinkController extends Controller
       'title' => 'required|max:255',
       'url' => 'required|url'
     ]);
-    Auth::user()->links()->update($request->only(['title', 'url']));
+    $link->update($request->only(['title', 'url']));
+    return redirect()->to(route('links.index'));
   }
 
   /**

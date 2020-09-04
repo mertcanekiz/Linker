@@ -11,8 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+  <!-- Latest Sortable -->
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 
-    <!-- Fonts -->
+
+  <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
@@ -23,16 +26,9 @@
     <div id="app">
         <nav class="navbar navbar-expand bg-primary navbar-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('links.index') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <ul class="navbar-nav mr-auto">
-                  @auth
-                    <li class="nav-item">
-                      <a href="{{ route('links.index') }}" class="nav-link">My links</a>
-                    </li>
-                  @endauth
-                </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -83,5 +79,17 @@
           </div>
         </main>
     </div>
+
+@yield('javascript')
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        let linksList = document.getElementById('linksList');
+        Sortable.create(document.getElementById('linksList'), {
+          handle: '.drag-handle',
+          animation: 200
+        });
+        // Handler when the DOM is fully loaded
+      });
+    </script>
 </body>
 </html>

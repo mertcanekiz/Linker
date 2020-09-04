@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'LinkController@index');
+Route::get('/', function () {
+  return view('welcome');
+});
 
 Auth::routes();
 
@@ -21,4 +23,5 @@ Route::get('/dashboard', 'LinkController@index')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('links', 'LinkController');
+Route::resource('links', 'LinkController')->except(['index']);
+Route::get('/admin', 'LinkController@index')->name('links.index');
