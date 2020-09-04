@@ -1,5 +1,5 @@
 <div>
-  <div draggable="false" class="card my-2">
+  <div draggable="false" class="card my-2" data-link-id="{{ $link->id }}">
     <div draggable="false"  class="d-flex align-items-stretch">
       <div draggable="false"  class="d-flex justify-content-center align-items-center rounded-left drag-handle text-light bg-secondary"  style="width: 2rem; cursor: pointer;">
         <span><i class="fas fa-ellipsis-v"></i></span>
@@ -14,7 +14,7 @@
               </h6>
             </div>
             <div>
-              <a href="{{ route('links.edit', $link) }}">Edit</a>
+              <a href="{{ route('links.edit', $link) }}"><span><i class="far fa-edit"></i></span> Edit</a>
             </div>
           </div>
         </div>

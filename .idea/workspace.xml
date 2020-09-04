@@ -118,6 +118,10 @@
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
     </include_path>
   </component>
   <component name="ProjectId" id="1h0kAZ6SAk1TP1yLbJl3Yn9KYeG" />
@@ -163,7 +167,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599155254296</updated>
-      <workItem from="1599155255385" duration="17340000" />
+      <workItem from="1599155255385" duration="23330000" />
     </task>
     <servers />
   </component>
@@ -183,9 +187,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599173675448" />
-    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1599176327700">
+    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1599184006188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599176327700" />
+    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599184006188" />
   </component>
 </project>

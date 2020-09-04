@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand bg-primary navbar-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('links.index') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <span><i class="fas fa-link"></i></span>  <strong>{{ config('app.name', 'Laravel') }}</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,21 +75,18 @@
 
         <main class="py-4">
           <div class="container">
+            @include('flash::message')
             @yield('content')
           </div>
         </main>
     </div>
 
-@yield('javascript')
     <script>
-      document.addEventListener("DOMContentLoaded", function(){
-        let linksList = document.getElementById('linksList');
-        Sortable.create(document.getElementById('linksList'), {
-          handle: '.drag-handle',
-          animation: 200
-        });
-        // Handler when the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function() {
+        $('div.alert').not('.alert-important').delay(2000).fadeOut(350);
       });
     </script>
+@yield('javascript')
+
 </body>
 </html>

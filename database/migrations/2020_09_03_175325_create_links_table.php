@@ -18,6 +18,7 @@ class CreateLinksTable extends Migration
       $table->foreignId('user_id');
       $table->string('title', 255);
       $table->text('url');
+      $table->integer('ordering')->default(-1);
       $table->timestamps();
 
       $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

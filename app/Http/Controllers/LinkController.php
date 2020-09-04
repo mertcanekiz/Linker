@@ -23,7 +23,7 @@ class LinkController extends Controller
    */
   public function index()
   {
-    $links = Auth::user()->links()->latest()->get();
+    $links = Auth::user()->links()->orderBy('ordering', 'asc')->get();
     return view('links.index', compact('links'));
   }
 
@@ -50,7 +50,18 @@ class LinkController extends Controller
       'url' => 'required|url',
     ]);
 
-    Auth::user()->links()->create($request->only(['title', 'url']));
+    $link = Auth::user()->links()->orderBy('ordering', 'asc')->first();
+    if ($link != null) {
+      $order = $link->ordering - 1;
+    } else {
+      $order = -1;
+    }
+
+    Auth::user()->links()->create([
+      'title' => $request->input('title'),
+      'url' => $request->input('url'),
+      'ordering' => $order
+    ]);
 
     return redirect()->to(route('links.index'));
   }
@@ -92,6 +103,7 @@ class LinkController extends Controller
       'url' => 'required|url'
     ]);
     $link->update($request->only(['title', 'url']));
+    flash('Your link has been updated.')->success();
     return redirect()->to(route('links.index'));
   }
 
@@ -105,6 +117,7 @@ class LinkController extends Controller
   {
     $this->authorize('delete', $link);
     $link->delete();
-    return redirect(route(links.index));
+    flash('Your link has been deleted.')->success();
+    return redirect(route('links.index'));
   }
 }

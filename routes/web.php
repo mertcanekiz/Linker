@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('links', 'LinkController')->except(['index']);
 Route::get('/admin', 'LinkController@index')->name('links.index');
+
+Route::post('/changeorder', function (\Illuminate\Http\Request $request) {
+  $ordering = $request->ordering;
+
+  for ($i = 0; $i < count($ordering); $i++) {
+    Auth::user()->links()->where('id', $ordering[$i])->update([
+      'ordering' => $i
+    ]);
+  }
+
+
+
+
+  return response()->json([
+    'newOrdering' => Auth::user()->links()->get()
+    ], 200);
+});
