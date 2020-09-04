@@ -20,7 +20,7 @@
       <div class="text-center mb-5">
         <h3 class="text-secondary">{{ '@' . Auth::user()->username }}</h3>
       </div>
-      @foreach ($links as $link)
+      @forelse ($links as $link)
         <div class="card my-2">
           <a class="btn btn-primary" href="{{ $link->url }}" target="_blank" onclick="visit({{ $link->id }})">
             <div class="card-body text-center">
@@ -28,7 +28,11 @@
             </div>
           </a>
         </div>
-      @endforeach
+      @empty
+        <div class="text-secondary text-center">
+        Your links will appear here.
+        </div>
+      @endforelse
     </div>
   </div>
 </div>

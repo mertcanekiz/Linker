@@ -13,18 +13,22 @@
               <div class="d-flex justify-content-between mb-2">
                   <h5 class="card-title">{{ $link->title }}</h5>
                 <div class="d-flex">
-                  <div class="mx-3">
-                    <a href="#" class="text-warning"><span><i class="fas fa-chart-line"></i></span> Activity</a>
+                  <div class="mx-1 mx-md-3">
+                    <a href="#" class="text-warning"><span><i class="fas fa-chart-line"></i></span> <span class="d-none d-md-inline">Activity</span></a>
                   </div>
-                  <div class="mx-3">
-                    <a href="{{ route('links.edit', $link) }}"><span><i class="far fa-edit"></i></span> Edit</a>
+                  <div class="mx-1 mx-md-3">
+                    <a href="{{ route('links.edit', $link) }}"><span><i class="far fa-edit"></i></span> <span class="d-none d-md-inline">Edit</span></a>
                   </div>
-                  <div class="mx-3">
-                    <a class="text-danger" href="#"><span><i class="far fa-trash-alt"></i></span> Delete</a>
+                  <div class="mx-1 mx-md-3">
+                    <a class="text-danger" href="#" onclick="event.preventDefault(); document.getElementById('deletion-form-{{$link->id}}').submit()"><span><i class="far fa-trash-alt"></i></span> <span class="d-none d-md-inline">Delete</span></a>
+                    <form id="deletion-form-{{$link->id}}" style="display:none" action="{{ route('links.destroy', $link) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                    </form>
                   </div>
                 </div>
               </div>
-              <h6 class="card-subtitle">
+              <h6 class="card-subtitle mb-1">
                 <a href="{{ $link->url }}" target="_blank">{{ $link->url }}</a>
                 <div class="mt-2">
                     {{ $link->visits_count }} visits

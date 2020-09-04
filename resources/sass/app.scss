@@ -23,7 +23,7 @@
   width:375px;
   height:667px;
   transform-origin: 0 0;
-  transform:scale(0.9);
+  transform:scale(0.78);
   /* you can calculate it by something like :
      108/326*2 = 0.663 => 0.67*/
   /* zoom:...; */ /* This is non-standard feature */
@@ -32,13 +32,20 @@
 
 .iphone-border {
   position: absolute;
-  transform: scale(0.623);
-  top: -332px;
-  left: -124px;
+  transform: scale(0.538);
+  top: -198px;
+  left: -147px;
 }
 
 @media only screen and (min-width:990px) {
   .main-content {
     //margin-top: 100px;
   }
+  #links-title {
+    margin-bottom: 50px;
+  }
+}
+
+.alert-success {
+  background-color: $secondary;
 }
