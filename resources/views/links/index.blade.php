@@ -20,11 +20,11 @@
         @endforelse
       </div>
     </div>
-    <div class="col-md-4 d-none d-lg-inline ml-xl-5 ml-md-1">
+    <div class="col-md-3 d-none d-lg-inline ml-xl-5 ml-md-5">
       <h3 class="my-3 text-primary">Preview</h3>
       <div style="margin-top: 120px;">
-        <img src="{{ asset('img/iphone-6s-front.png') }}" alt="iphone-border" class="iphone-border">
-        <iframe id="phone-frame" src="/{{Auth::user()->username}}" class="iPhone6S"></iframe>
+        <img src="{{ asset('img/iphone-6s-black-front.png') }}" alt="iphone-border" class="iphone-border">
+        <iframe scrolling="no" frameBorder="0" id="phone-frame" src="/{{Auth::user()->username}}" class="iPhone6S"></iframe>
       </div>
 
     </div>

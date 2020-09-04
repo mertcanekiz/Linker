@@ -31,7 +31,7 @@
               <h6 class="card-subtitle mb-1">
                 <a href="{{ $link->url }}" target="_blank">{{ $link->url }}</a>
                 <div class="mt-2">
-                    {{ $link->visits_count }} visits
+                  <span class="text-muted">{{ $link->visits_count }} visits</span>
                 </div>
 
               </h6>
