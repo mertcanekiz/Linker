@@ -6,38 +6,41 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Linker | {{ $user->username }}</title>
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  {{--  <link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/flatly/bootstrap.min.css">
   <style>
-    body {
-      background: #222;
-    }
   </style>
 </head>
-<body>
+<body class="bg-secondary">
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-3 mt-5">
-      <div class="text-center mb-5">
-        <h3 class="text-secondary">{{ '@' . Auth::user()->username }}</h3>
+    <div class="col-md-8 offset-md-2 mt-4">
+      <div class="d-flex justify-content-center flex-column align-items-center mb-3">
+        <img class="img-thumbnail rounded-circle mb-3" src="https://www.gravatar.com/avatar/bd3c72a53993932713aa32c99dd128a5" width="100">
+        <div class="text-center">
+          <h4 class="text-primary">{{ '@' . Auth::user()->username }}</h4>
+        </div>
       </div>
-      @forelse ($links as $link)
-        <div class="card my-2">
-          <a class="btn btn-primary" href="{{ $link->url }}" target="_blank" onclick="visit({{ $link->id }})">
-            <div class="card-body text-center">
-              <strong>{{ $link->title }}</strong>
-            </div>
-          </a>
-        </div>
-      @empty
-        <div class="text-secondary text-center">
+        @forelse ($links as $link)
+          <div>
+            <a class="btn btn-block btn-primary rounded-pill my-3" href="{{ $link->url }}" target="_blank"
+               onclick="visit({{ $link->id }})">
+              <div class="text-center my-2">
+                <strong>{{ $link->title }}</strong>
+              </div>
+            </a>
+          </div>
+        @empty
+      <div class="text-secondary text-center">
         Your links will appear here.
-        </div>
+      </div>
       @endforelse
     </div>
   </div>
 </div>
 
-<script src="{{ asset('js/app.js') }}"></script>
+{{--<script src="{{ asset('js/app.js') }}"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 <script>
   function visit(linkId) {
     axios.post(`/links/${linkId}/visit`)
