@@ -45,7 +45,7 @@ class DeleteLinksTest extends TestCase
    * @test
    * @return void
    */
-  public function it_authenticated_users_may_not_delete_other_users_links()
+  public function authenticated_users_may_not_delete_other_users_links()
   {
     $this->signIn();
     $link = create('App\Link');
