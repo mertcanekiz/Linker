@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
@@ -23,9 +21,7 @@ class DashboardTest extends TestCase
     $this->withoutExceptionHandling();
     $this->signIn();
     $user = Auth::user();
-    $linkOne = create('App\Link', ['user_id' => $user->id]);
-    $linkTwo = create('App\Link', ['user_id' => $user->id]);
-    $linkThree = create('App\Link', ['user_id' => $user->id]);
+    create('App\Link', ['user_id' => $user->id], 3);
     $ordering = [2, 3, 1];
     $this->post('/changeorder', [
       'ordering' => $ordering
@@ -43,9 +39,7 @@ class DashboardTest extends TestCase
   {
     $this->signIn();
     $user = Auth::user();
-    $linkOne = create('App\Link', ['user_id' => $user->id]);
-    $linkTwo = create('App\Link', ['user_id' => $user->id]);
-    $linkThree = create('App\Link', ['user_id' => $user->id]);
+    create('App\Link', ['user_id' => $user->id], 3);
     $ordering = [2, 3, 999];
     $this->post('/changeorder', [
       'ordering' => $ordering
