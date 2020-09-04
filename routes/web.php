@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('links', 'LinkController')->except(['index']);
 Route::get('/admin', 'LinkController@index')->name('links.index');
+Route::post('/links/{link}/visit', 'LinkController@visit')->name('links.visit');
 
 Route::post('/changeorder', 'LinkController@changeOrder')->name('links.changeOrder');
 

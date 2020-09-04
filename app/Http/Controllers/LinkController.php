@@ -18,7 +18,7 @@ class LinkController extends Controller
 
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware('auth')->except('visit');
   }
 
   /**
@@ -75,6 +75,20 @@ class LinkController extends Controller
       'newOrdering' => Auth::user()->links()->get()
     ], 200);
 
+  }
+
+  /**
+   * Visit a link
+   *
+   * @param Link $link
+   * @return Response
+   */
+  public function visit(Request $request, Link $link)
+  {
+    $link->visits()->create([
+      'user_agent' => $request->userAgent()
+    ]);
+    return response()->json(['message' => 'Visit created'], 200);
   }
 
   /**

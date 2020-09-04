@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
-    public function link()
-    {
-      return $this->belongsTo('App\Link');
-    }
+  protected $guarded = [];
+
+  public function link()
+  {
+    return $this->belongsTo('App\Link');
+  }
 }

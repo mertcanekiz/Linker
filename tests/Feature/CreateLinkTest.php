@@ -38,4 +38,19 @@ class CreateLinkTest extends TestCase
       ->assertStatus(302);
     $this->assertDatabaseHas('links', $link->toArray());
   }
+
+  /**
+   * Any user can visit any link
+   *
+   * @test
+   * @return void
+   */
+  public function any_user_can_visit_any_link()
+  {
+    $this->withoutExceptionHandling();
+    $link = create('App\Link');
+    $this->post(route('links.visit', $link))
+      ->assertStatus(200);
+    $this->assertDatabaseHas('visits', ['link_id' => $link->id]);
+  }
 }
