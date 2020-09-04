@@ -12,4 +12,9 @@ class Visit extends Model
   {
     return $this->belongsTo('App\Link');
   }
+
+  public function owner()
+  {
+    return $this->hasOneThrough('App\User', 'App\Link');
+  }
 }

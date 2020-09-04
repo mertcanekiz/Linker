@@ -41,6 +41,11 @@ class User extends Authenticatable
       return $this->hasMany('App\Link');
     }
 
+    public function visits()
+    {
+      return $this->hasManyThrough('App\Visit', 'App\Link');
+    }
+
     public function getRouteKeyName()
     {
       return 'username';
