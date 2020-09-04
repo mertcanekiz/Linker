@@ -11,6 +11,18 @@ class DashboardTest extends TestCase
   use DatabaseMigrations;
 
   /**
+   * An unauthenticated user can not change ordering of links
+   *
+   * @test
+   * @return void
+   */
+  public function an_unauthenticated_user_can_not_change_ordering_of_links()
+  {
+    $this->post('/changeorder')
+      ->assertRedirect(route('login'));
+  }
+
+  /**
    * Change the ordering of the links
    *
    * @test
