@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Link;
 use App\User;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +24,7 @@ class LinkController extends Controller
   /**
    * Display a listing of the resource.
    *
-   * @return \Illuminate\Http\Response
+   * @return View
    */
   public function index()
   {
@@ -62,7 +65,7 @@ class LinkController extends Controller
       return response()->json([], 400);
     }
 
-    for ($i = 0; $i < count($ordering); $i++) {
+    foreach ($ordering as $i => $iValue) {
       Auth::user()->links()->where('id', $ordering[$i])->update([
         'ordering' => $i
       ]);
@@ -77,7 +80,7 @@ class LinkController extends Controller
   /**
    * Show the form for creating a new resource.
    *
-   * @return \Illuminate\Http\Response
+   * @return View
    */
   public function create()
   {
@@ -87,8 +90,8 @@ class LinkController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param \Illuminate\Http\Request $request
-   * @return \Illuminate\Http\Response
+   * @param Request $request
+   * @return RedirectResponse
    */
   public function store(Request $request)
   {
@@ -98,7 +101,7 @@ class LinkController extends Controller
     ]);
 
     $link = Auth::user()->links()->orderBy('ordering', 'asc')->first();
-    if ($link != null) {
+    if ($link !== null) {
       $order = $link->ordering - 1;
     } else {
       $order = -1;
@@ -116,8 +119,8 @@ class LinkController extends Controller
   /**
    * Display the specified resource.
    *
-   * @param \App\Link $link
-   * @return \Illuminate\Http\Response
+   * @param Link $link
+   * @return Response
    */
   public function show(Link $link)
   {
@@ -127,8 +130,8 @@ class LinkController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param \App\Link $link
-   * @return \Illuminate\Http\Response
+   * @param Link $link
+   * @return View
    */
   public function edit(Link $link)
   {
@@ -138,9 +141,10 @@ class LinkController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param \Illuminate\Http\Request $request
-   * @param \App\Link $link
-   * @return \Illuminate\Http\Response
+   * @param Request $request
+   * @param Link $link
+   * @return RedirectResponse
+   * @throws AuthorizationException
    */
   public function update(Request $request, Link $link)
   {
@@ -157,8 +161,10 @@ class LinkController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param \App\Link $link
-   * @return \Illuminate\Http\Response
+   * @param Link $link
+   * @return RedirectResponse
+   * @throws AuthorizationException
+   * @throws Exception
    */
   public function destroy(Link $link)
   {
