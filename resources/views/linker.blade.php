@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-md-8 offset-md-2 mt-4">
       <div class="d-flex justify-content-center flex-column align-items-center mb-3">
-        <img class="img-thumbnail rounded-circle mb-3" src="https://www.gravatar.com/avatar/bd3c72a53993932713aa32c99dd128a5" width="100">
+        <img class="img-thumbnail rounded-circle mb-3" src="{{ asset('img/osimum-logo-small.jpg') }}" width="100">
         <div class="text-center">
           <h4 class="text-primary">{{ '@' . Auth::user()->username }}</h4>
         </div>
